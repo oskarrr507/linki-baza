@@ -2,6 +2,23 @@
 include ('db_config.php');
 include ('include.php');
 include ('social.php');
+
+// Plik, w którym będzie przechowywana liczba odsłon
+$counterFile = 'counter.txt';
+
+// Sprawdź, czy plik istnieje, jeśli nie, utwórz go i zapisz wartość 0
+if (!file_exists($counterFile)) {
+    file_put_contents($counterFile, 0);
+}
+
+// Odczytaj aktualną liczbę odsłon z pliku
+$counter = (int)file_get_contents($counterFile);
+
+// Zwiększ licznik o 1
+$counter++;
+
+// Zapisz nową wartość do pliku
+file_put_contents($counterFile, $counter);
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,14 +67,10 @@ include ('social.php');
 		<footer>
 			<div> pk.sth © 2022</div>
 			<div>Strona o niczym by PK przygotowane specjalnie dla 1pt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+			<div>Liczba odsłon strony: <?php echo $counter; ?></div>
 		</footer>
 	</div>
 </body>
 </html>
 
 <?php $polaczenie -> close(); ?>
-
-
-					
-			
-			
